@@ -1,13 +1,6 @@
 /**
- * Access control rules for network
+ * New access control file
  */
-rule Default {
-    description: "Allow all participants access to all resources"
-    participant: "ANY"
-    operation: ALL
-    resource: "org.hcsc.network.*"
-    action: ALLOW
-}
 
 rule SystemACL {
   description:  "System ACL to permit all access"
@@ -16,3 +9,85 @@ rule SystemACL {
   resource: "org.hyperledger.composer.system.**"
   action: ALLOW
 }
+
+rule Read {
+    description: "Description of the ACL rule"
+    participant(m): "org.hcsc.network.*"
+    operation: READ
+    resource(v): "org.hcsc.network.*"
+    condition: (v.owner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfManufacturer {
+    description: "Description of the ACL rule"
+    participant: "org.hcsc.network.Manufacturer"
+    operation: CREATE
+    resource: "org.hcsc.network.M2O"
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfManufacturer2 {
+  	description:"Manufacturer can update its commodity only by M2O"
+    participant(m): "org.hcsc.network.Manufacturer"
+    operation: UPDATE
+    resource(v): "org.hcsc.network.*"
+    transaction(tx): "org.hcsc.network.M2O"
+    condition: (v.owner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfManufacturer3 {
+  	description:"Manufacturer can update its commodity only by M2O"
+    participant(m): "org.hcsc.network.Manufacturer"
+    operation: READ
+    resource(v): "org.hcsc.network.M2O"
+    condition: (v.issuer.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfOEM {
+    description: "Description of the ACL rule"
+    participant: "org.hcsc.network.OEM"
+    operation: CREATE
+    resource: "org.hcsc.network.O2D"
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfOEM2 {
+    description: "Description of the ACL rule"
+    participant(m): "org.hcsc.network.OEM"
+    operation: UPDATE
+    resource(v): "org.hcsc.network.*"
+    transaction(tx): "org.hcsc.network.O2D"
+    condition: (v.owner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfOEM3 {
+    description: "Description of the ACL rule"
+    participant(m): "org.hcsc.network.OEM"
+    operation: READ
+    resource(v): "org.hcsc.network.M2O"
+    condition: (v.newOwner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfOEM4 {
+    description: "Description of the ACL rule"
+    participant(m): "org.hcsc.network.OEM"
+    operation: READ
+    resource(v): "org.hcsc.network.O2D"
+    condition: (v.issuer.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRuleWithTransactionOfDistributor {
+    description: "Description of the ACL rule"
+    participant(m): "org.hcsc.network.Distributor"
+    operation: READ
+    resource(v): "org.hcsc.network.O2D"
+    condition: (v.newOwner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+

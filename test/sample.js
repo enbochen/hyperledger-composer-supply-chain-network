@@ -56,29 +56,41 @@ describe('Commodity Trading', () => {
         it('should be able to trade a commodity', () => {
             const factory = businessNetworkConnection.getBusinessNetwork().getFactory();
 
-            // create the traders
-            const dan = factory.newResource(NS, 'Trader', 'dan@email.com');
-            dan.firstName = 'Dan';
-            dan.lastName = 'Selman';
+            // create the Manufacturer
+            const m1 = factory.newResource(NS, 'Manufacturer', 'M1');
+            m1.companyName = 'FASTory';
 
-            const simon = factory.newResource(NS, 'Trader', 'simon@email.com');
-            simon.firstName = 'Simon';
-            simon.lastName = 'Stone';
+            // create the OEMs
+            const o1 = factory.newResource(NS, 'OEM', 'O1');
+            o1.companyName = 'Red';
+            const o2 = factory.newResource(NS, 'OEM', 'O2');
+            o2.companyName = 'Blue';
+            const o3 = factory.newResource(NS, 'OEM', 'O3');
+            o3.companyName = 'Green';
+
+            // create the Distributors
+            const d1 = factory.newResource(NS, 'Distributor', 'D1');
+            d1.companyName = 'East';
+            const d2 = factory.newResource(NS, 'Distributor', 'D2');
+            d2.companyName = 'South';
+            const d3 = factory.newResource(NS, 'Distributor', 'D3');
+            d3.companyName = 'North';
 
             // create the commodity
-            const commodity = factory.newResource(NS, 'Commodity', 'EMA');
-            commodity.description = 'Corn';
+            const commodity = factory.newResource(NS, 'Commodity', 'EP1');
+            commodity.description = 'Engine Pump';
             commodity.mainExchange = 'Euronext';
             commodity.quantity = 100;
-            commodity.owner = factory.newRelationship(NS, 'Trader', dan.$identifier);
+            commodity.owner = factory.newRelationship(NS, 'Manufacturer', m1.$identifier);
 
             // create the trade transaction
-            const trade = factory.newTransaction(NS, 'Trade');
-            trade.newOwner = factory.newRelationship(NS, 'Trader', simon.$identifier);
+            const trade = factory.newTransaction(NS, 'M2O');
+            trade.issuer = factory.newRelationship(NS, 'Manufacturer', m1.$identifier);
+            trade.newOwner = factory.newRelationship(NS, 'OEM', o1.$identifier);
             trade.commodity = factory.newRelationship(NS, 'Commodity', commodity.$identifier);
 
-            // the owner should of the commodity should be dan
-            commodity.owner.$identifier.should.equal(dan.$identifier);
+            // the owner should of the commodity should be m1
+            commodity.owner.$identifier.should.equal(m1.$identifier);
 
             // Get the asset registry.
             let commodityRegistry;
@@ -89,11 +101,11 @@ describe('Commodity Trading', () => {
                     return commodityRegistry.add(commodity);
                 })
                 .then(() => {
-                    return businessNetworkConnection.getParticipantRegistry(NS + '.Trader');
+                    return businessNetworkConnection.getParticipantRegistry(NS + '.Manufacturer');
                 })
                 .then((participantRegistry) => {
                     // add the traders
-                    return participantRegistry.addAll([dan, simon]);
+                    return participantRegistry.addAll([m1, o1]);
                 })
                 .then(() => {
                     // submit the transaction
@@ -104,8 +116,8 @@ describe('Commodity Trading', () => {
                     return commodityRegistry.get(commodity.$identifier);
                 })
                 .then((newCommodity) => {
-                    // the owner of the commodity should now be simon
-                    newCommodity.owner.$identifier.should.equal(simon.$identifier);
+                    // the owner of the commodity should now be o1
+                    newCommodity.owner.$identifier.should.equal(o1.$identifier);
                 });
         });
     });

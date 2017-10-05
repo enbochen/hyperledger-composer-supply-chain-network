@@ -4,18 +4,38 @@
 namespace org.hcsc.network
 
 asset Commodity identified by tradingSymbol {
-    o String tradingSymbol
+	  o String tradingSymbol
     o String description
     o String mainExchange
     o Double quantity
     --> Trader owner
+    --> Trader issuer optional
 }
-participant Trader identified by tradeId {
-    o String tradeId
-    o String firstName
-    o String lastName
+
+abstract participant Trader {
+		o String companyName
 }
-transaction Trade {
-    --> Commodity commodity
-    --> Trader newOwner
+
+participant Manufacturer identified by tradeId extends Trader {
+		o String tradeId
+}
+
+participant OEM identified by tradeId extends Trader {
+		o String tradeId
+}
+
+participant Distributor identified by tradeId extends Trader {
+		o String tradeId
+}
+
+transaction M2O {
+	  --> Commodity commodity
+    --> Manufacturer issuer
+    --> OEM newOwner
+}
+
+transaction O2D {
+	  --> Commodity commodity
+    --> OEM issuer
+    --> Distributor newOwner
 }
