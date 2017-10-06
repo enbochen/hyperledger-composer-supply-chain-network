@@ -46,6 +46,15 @@ rule ConditionalRuleWithTransactionOfManufacturer3 {
     action: ALLOW
 }
 
+rule ConditionalRuleWithTransactionOfManufacturer4 {
+    description: "Description of the ACL rule"
+    participant(m): "org.hcsc.network.Manufacturer"
+    operation: CREATE
+    resource(v): "org.hcsc.network.Commodity"
+    condition: (v.owner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
 rule ConditionalRuleWithTransactionOfOEM {
     description: "Description of the ACL rule"
     participant: "org.hcsc.network.OEM"
