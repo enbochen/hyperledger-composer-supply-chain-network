@@ -1,6 +1,9 @@
 # Hyperledger Composer Supply Chain Network
 
-> This is one implementation of Hyperledger Composer for supply chain, which demonstrates how Hyperledger blockchain improve transparency and traceability of industrial supply chain.
+This is one implementation of Hyperledger Composer for supply chain, which demonstrates how Hyperledger blockchain improve transparency and traceability of industrial supply chain.
+
+![](/docs/flow.png)
+
 
 This business network defines:
 
