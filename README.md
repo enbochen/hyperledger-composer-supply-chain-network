@@ -1,6 +1,6 @@
 # Hyperledger Composer Supply Chain Network
 
-This is one implementation of Hyperledger Composer for supply chain, which demonstrates how Hyperledger blockchain improve transparency and traceability of industrial supply chain.
+This is one implementation of [Hyperledger Composer](https://github.com/hyperledger/composer) for supply chain, which demonstrates how Hyperledger blockchain improve transparency and traceability of industrial supply chain.
 
 ![](/docs/flow.png)
 
@@ -59,4 +59,13 @@ Submit a `M2O` transaction:
 
 After submitting this transaction, you should now see the transaction in the Transaction Registry and that a `SampleEvent` has been emitted(WIP). As a result, the value of the `tradingSymbol:ts1` should now be `new owner` in the Asset Registry.
 
+
 Congratulations!
+
+
+
+More info:
+- Build on [template](https://github.com/hyperledger/composer-sample-networks/tree/master/packages/basic-sample-network)
+- Hyperledger Composer Official [Documentation](https://hyperledger.github.io/composer/introduction/introduction.html)
+- Developer [Guide](https://hyperledger.github.io/composer/tutorials/developer-guide.html)
+- In-depth research on hyperledger composer [link](https://github.com/aietcn/hyperledger-composer)
