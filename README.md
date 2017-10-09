@@ -5,53 +5,55 @@
 This business network defines:
 
 **Participant**
-`SampleParticipant`
+`Manufacturer` `OEM` `Distributor`
 
 **Asset**
-`SampleAsset`
+`Commodity`
 
 **Transaction**
-`SampleTransaction`
+`M2O` `O2D`
 
 **Event**
-`SampleEvent`
+`none` (WIP)
 
-SampleAssets are owned by a SampleParticipant, and the value property on a SampleAsset can be modified by submitting a SampleTransaction. The SampleTransaction emits a SampleEvent that notifies applications of the old and new values for each modified SampleAsset.
+Commodity are owned by a Manufacturer,OEM or Distributor,  and the owner property on a Commodity can be modified by submitting a transaction(e.g. M2O, O2D). The transaction emits a SampleEvent that notifies applications of the old and new values for each modified Commodity.(WIP)
 
 To test this Business Network Definition in the **Test** tab:
 
-Create a `SampleParticipant` participant:
+Create a `Manufacturer` participant:
 
 ```
 {
-  "$class": "org.acme.sample.SampleParticipant",
-  "participantId": "Toby",
-  "firstName": "Tobias",
-  "lastName": "Hunter"
+  "$class": "org.hcsc.network.Manufacturer",
+  "tradeId": "M1",
+  "companyName": "FAST"
 }
 ```
 
-Create a `SampleAsset` asset:
+Create a `Commodity` asset:
 
 ```
 {
-  "$class": "org.acme.sample.SampleAsset",
-  "assetId": "assetId:1",
-  "owner": "resource:org.acme.sample.SampleParticipant#Toby",
-  "value": "original value"
+  "$class": "org.hcsc.network.Commodity",
+  "tradingSymbol": "ts1",
+  "description": "Aliquip.",
+  "mainExchange": "Commodo.",
+  "quantity": 216.3,
+  "owner": "resource:org.hcsc.network.Manufacturer#M1"
 }
 ```
 
-Submit a `SampleTransaction` transaction:
+Submit a `M2O` transaction:
 
 ```
 {
-  "$class": "org.acme.sample.SampleTransaction",
-  "asset": "resource:org.acme.sample.SampleAsset#assetId:1",
-  "newValue": "new value"
+  "$class": "org.hcsc.network.M2O",
+  "commodity": "resource:org.hcsc.network.Commodity#ts1",
+  "issuer": "resource:org.hcsc.network.Manufacturer#M1",
+  "newOwner": "resource:org.hcsc.network.OEM#O1"
 }
 ```
 
-After submitting this transaction, you should now see the transaction in the Transaction Registry and that a `SampleEvent` has been emitted. As a result, the value of the `assetId:1` should now be `new value` in the Asset Registry.
+After submitting this transaction, you should now see the transaction in the Transaction Registry and that a `SampleEvent` has been emitted(WIP). As a result, the value of the `tradingSymbol:ts1` should now be `new owner` in the Asset Registry.
 
 Congratulations!
