@@ -60,10 +60,17 @@ Submit a `M2O` transaction:
 After submitting this transaction, you should now see the transaction in the Transaction Registry and that a `SampleEvent` has been emitted(WIP). As a result, the value of the `tradingSymbol:ts1` should now be `new owner` in the Asset Registry.
 
 
+### How to run it?
+
+```
+1. npm install
+2. mkdir dist
+3. composer archive create -a dist/hyperledger-supply-chain-network.bna --sourceType dir --sourceName . 
+4. Next, in a browser, navigate to the online Bluemix Composer Playground http://composer-playground.mybluemix.net and import the newly-generated BNA file into the Playground using the "Import/Replace" button at the bottom left of the screen. Locate the dist/hyperledger-supply-chain-network.bna file under your 'my-network' folder and upload it. This automatically deploys the new business network.
+
 Congratulations!
 
-
-
+```
 More info:
 - Build on [template](https://github.com/hyperledger/composer-sample-networks/tree/master/packages/basic-sample-network)
 - Hyperledger Composer Official [Documentation](https://hyperledger.github.io/composer/introduction/introduction.html)
