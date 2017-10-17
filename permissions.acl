@@ -10,6 +10,14 @@ rule SystemACL {
   action: ALLOW
 }
 
+rule Admin {
+  description: "allow admin to manipulate all the resource"
+  participant: "org.hyperledger.composer.system.NetworkAdmin#admin"
+  operation: ALL
+  resource: "org.hcsc.network.*"
+  action: ALLOW
+}
+
 rule Read {
     description: "All participants can read its own goods"
     participant(m): "org.hcsc.network.*"
