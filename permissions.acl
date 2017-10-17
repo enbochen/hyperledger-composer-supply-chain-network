@@ -11,7 +11,7 @@ rule SystemACL {
 }
 
 rule Read {
-    description: "Description of the ACL rule"
+    description: "All participants can read its own goods"
     participant(m): "org.hcsc.network.*"
     operation: READ
     resource(v): "org.hcsc.network.*"
@@ -20,7 +20,7 @@ rule Read {
 }
 
 rule ConditionalRuleWithTransactionOfManufacturer {
-    description: "Description of the ACL rule"
+    description: "Allow all Manufacturers to access M2O transaction"
     participant: "org.hcsc.network.Manufacturer"
     operation: CREATE
     resource: "org.hcsc.network.M2O"
@@ -28,7 +28,7 @@ rule ConditionalRuleWithTransactionOfManufacturer {
 }
 
 rule ConditionalRuleWithTransactionOfManufacturer2 {
-  	description:"Manufacturer can update its commodity only by M2O"
+  	description:"Manufacturer can transfer its own commodity only by M2O transaction"
     participant(m): "org.hcsc.network.Manufacturer"
     operation: UPDATE
     resource(v): "org.hcsc.network.*"
@@ -38,7 +38,7 @@ rule ConditionalRuleWithTransactionOfManufacturer2 {
 }
 
 rule ConditionalRuleWithTransactionOfManufacturer3 {
-  	description:"Manufacturer can update its commodity only by M2O"
+  	description:"Manufacturer can read its own transaction(M2O) records"
     participant(m): "org.hcsc.network.Manufacturer"
     operation: READ
     resource(v): "org.hcsc.network.M2O"
@@ -47,7 +47,7 @@ rule ConditionalRuleWithTransactionOfManufacturer3 {
 }
 
 rule ConditionalRuleWithTransactionOfManufacturer4 {
-    description: "Description of the ACL rule"
+    description: "Manufacturer can create its own resource"
     participant(m): "org.hcsc.network.Manufacturer"
     operation: CREATE
     resource(v): "org.hcsc.network.Commodity"
@@ -56,7 +56,7 @@ rule ConditionalRuleWithTransactionOfManufacturer4 {
 }
 
 rule ConditionalRuleWithTransactionOfOEM {
-    description: "Description of the ACL rule"
+    description: "Allow all OEMs to access O2D transaction"
     participant: "org.hcsc.network.OEM"
     operation: CREATE
     resource: "org.hcsc.network.O2D"
@@ -64,7 +64,7 @@ rule ConditionalRuleWithTransactionOfOEM {
 }
 
 rule ConditionalRuleWithTransactionOfOEM2 {
-    description: "Description of the ACL rule"
+    description: "OEM can update its own commodity only by O2D transaction"
     participant(m): "org.hcsc.network.OEM"
     operation: UPDATE
     resource(v): "org.hcsc.network.*"
@@ -74,7 +74,7 @@ rule ConditionalRuleWithTransactionOfOEM2 {
 }
 
 rule ConditionalRuleWithTransactionOfOEM3 {
-    description: "Description of the ACL rule"
+    description: "Every OEM can read its own transactions(M2O) record"
     participant(m): "org.hcsc.network.OEM"
     operation: READ
     resource(v): "org.hcsc.network.M2O"
@@ -83,7 +83,7 @@ rule ConditionalRuleWithTransactionOfOEM3 {
 }
 
 rule ConditionalRuleWithTransactionOfOEM4 {
-    description: "Description of the ACL rule"
+    description: "All OEM can read its own transactions(O2D) record"
     participant(m): "org.hcsc.network.OEM"
     operation: READ
     resource(v): "org.hcsc.network.O2D"
@@ -92,7 +92,7 @@ rule ConditionalRuleWithTransactionOfOEM4 {
 }
 
 rule ConditionalRuleWithTransactionOfDistributor {
-    description: "Description of the ACL rule"
+    description: "All Distributor can read its own transactions(O2D) record"
     participant(m): "org.hcsc.network.Distributor"
     operation: READ
     resource(v): "org.hcsc.network.O2D"
