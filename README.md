@@ -14,7 +14,7 @@ This is one implementation of [Hyperledger Composer](https://github.com/hyperled
 
 Congratulations!
 
-P.S. No.4 just only runs on web brower, all the data are stored in loacal Storage. If you want run it on real blockchain network. Please follow [Developer Guide](https://hyperledger.github.io/composer/tutorials/developer-guide.html) and [Developer Environment](https://hyperledger.github.io/composer/installing/development-tools.html) to make it real!
+P.S. No.4 just only runs on web brower, all the data are stored in local storage. If you want run it on real blockchain network. Please follow [Developer Guide](https://hyperledger.github.io/composer/tutorials/developer-guide.html) and [Developer Environment](https://hyperledger.github.io/composer/installing/development-tools.html) to make it real!
 
 
 ### Model
