@@ -20,16 +20,16 @@ P.S. No.4 just only runs on web brower, all the data are stored in local storage
 ### Model
 This business network defines:
 
-**Participant**
+- **Participant**
 `Manufacturer` `OEM` `Distributor`
 
-**Asset**
+- **Asset**
 `Commodity`
 
-**Transaction**
+- **Transaction**
 `M2O` `O2D`
 
-**Event**
+- **Event**
 `none` (WIP)
 
 Commodity are owned by a Manufacturer,OEM or Distributor,  and the owner property on a Commodity can be modified by submitting a transaction(e.g. M2O, O2D). The transaction emits a SampleEvent that notifies applications of the old and new values for each modified Commodity.(WIP)
