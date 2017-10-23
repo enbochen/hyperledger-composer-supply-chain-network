@@ -14,22 +14,21 @@ This is one implementation of [Hyperledger Composer](https://github.com/hyperled
 
 Congratulations!
 
-P.S. No.4 just only runs on web brower, all the data are stored in loacal Storage. If you want run it on real blockchain network. Please follow [Developer Guide](https://hyperledger.github.io/composer/tutorials/developer-guide.html) and [Developer Environment](https://hyperledger.github.io/composer/installing/development-tools.html) to make it real!
-
+P.S. No.4 just only runs on web brower, all the data are stored in local storage. If you want run it on real blockchain network. Please follow [Developer Guide](https://hyperledger.github.io/composer/tutorials/developer-guide.html) and [Developer Environment](https://hyperledger.github.io/composer/installing/development-tools.html) to make it real!
 
 ### Model
 This business network defines:
 
-**Participant**
+- **Participant**
 `Manufacturer` `OEM` `Distributor`
 
-**Asset**
+- **Asset**
 `Commodity`
 
-**Transaction**
+- **Transaction**
 `M2O` `O2D`
 
-**Event**
+- **Event**
 `none` (WIP)
 
 Commodity are owned by a Manufacturer,OEM or Distributor,  and the owner property on a Commodity can be modified by submitting a transaction(e.g. M2O, O2D). The transaction emits a SampleEvent that notifies applications of the old and new values for each modified Commodity.(WIP)
@@ -77,6 +76,27 @@ After submitting this transaction, you should now see the transaction in the Tra
 ### Pre-requisites on MacOS
 - [Install nvm and Apple Xcode](https://hyperledger.github.io/composer/installing/prereqs-mac.html)
 - [Installing Hyperledger Composer development tools](https://hyperledger.github.io/composer/installing/development-tools.html) (Most important: `npm install -g composer-cli`)
+
+### Set Up Fabric
+kill and remove all running containers, and should remove all previously created Hyperledger Fabric chaincode images.
+```
+docker kill $(docker ps -q)
+docker rm $(docker ps -aq)
+docker rmi $(docker images dev-* -q)
+```
+Download the fabric runtime first. If you have already downloaded it, then start the fabric environment, and create a Hyperledger Composer profile. :
+```
+cd tools/fabric/
+./downloadFabric.sh
+./startFabric.sh
+./createComposerProfile.sh
+```
+Stop Fabric runtime at the end of your development session:
+```
+cd tools/fabric/
+./stopFabric.sh
+./teardownFabric.sh
+```
 
 ### More info:
 - Build on [template](https://github.com/hyperledger/composer-sample-networks/tree/master/packages/basic-sample-network)
