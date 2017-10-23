@@ -77,21 +77,29 @@ After submitting this transaction, you should now see the transaction in the Tra
 - [Install nvm and Apple Xcode](https://hyperledger.github.io/composer/installing/prereqs-mac.html)
 - [Installing Hyperledger Composer development tools](https://hyperledger.github.io/composer/installing/development-tools.html) (Most important: `npm install -g composer-cli`)
 
+### Installing and running Hyperledger Composer Playground locally
+1. Pick a directory that you want to install into, then run the following command to download and start a Hyperledger Fabric instance and Hyperledger Composer Playground:
+```
+curl -sSL https://hyperledger.github.io/composer/install-hlfv1.sh | bash
+```
+2. Access your local Hyperledger Composer Playground by clicking this link: http://localhost:8080. Please note: Private browsing is not supported when running the Playground locally.
+
+
 ### Set Up Fabric
-kill and remove all running containers, and should remove all previously created Hyperledger Fabric chaincode images.
+1. kill and remove all running containers, and should remove all previously created Hyperledger Fabric chaincode images.
 ```
 docker kill $(docker ps -q)
 docker rm $(docker ps -aq)
 docker rmi $(docker images dev-* -q)
 ```
-Download the fabric runtime first. If you have already downloaded it, then start the fabric environment, and create a Hyperledger Composer profile. :
+2. Download the fabric runtime first. If you have already downloaded it, then start the fabric environment, and create a Hyperledger Composer profile. :
 ```
 cd tools/fabric/
 ./downloadFabric.sh
 ./startFabric.sh
 ./createComposerProfile.sh
 ```
-Stop Fabric runtime at the end of your development session:
+3. Stop Fabric runtime at the end of your development session:
 ```
 cd tools/fabric/
 ./stopFabric.sh
