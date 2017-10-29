@@ -8,7 +8,7 @@ This is one implementation of [Hyperledger Composer](https://github.com/hyperled
 
 1. Install packages: `npm install`
 2. Create a folder for local archive: `mkdir dist`
-3. Generate the BNA(Business Network Archieve) file: `composer archive create -a dist/hyperledger-supply-chain-network.bna --sourceType dir --sourceName . ` (Note: the command `npm run prepublish` achieves the same thing)
+3. Generate the BNA(Business Network Archieve) file: `npm run prepublish`
 4. Next, in a browser, navigate to the online Bluemix Composer Playground http://composer-playground.mybluemix.net and import the newly-generated BNA file into the Playground using the "Import/Replace" button at the bottom left of the screen. Locate the `dist/hyperledger-supply-chain-network.bna` file under your 'hyperledger-supply-chain-network' folder and upload it. This automatically deploys the new business network. 
 5. Try to play with it. ([Playground Tutorial](https://hyperledger.github.io/composer/tutorials/playground-guide.html))
 
