@@ -53,3 +53,6 @@ transaction O2D {
     --> OEM issuer
     --> Distributor newOwner
 }
+
+transaction SetupDemo {
+}
