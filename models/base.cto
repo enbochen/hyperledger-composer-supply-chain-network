@@ -55,4 +55,5 @@ transaction O2D {
 }
 
 transaction SetupDemo {
+		o Manufacturer[] manufacturers
 }
