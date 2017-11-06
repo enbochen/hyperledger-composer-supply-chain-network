@@ -30,11 +30,11 @@ abstract participant Trader {
     o String companyName
 }
 
-participant Manufacturer identified by tradeId extends Trader {
+participant Supplier identified by tradeId extends Trader {
     o String tradeId
 }
 
-participant OEM identified by tradeId extends Trader {
+participant Manufacturer identified by tradeId extends Trader {
     o String tradeId
 }
 
@@ -42,18 +42,24 @@ participant Distributor identified by tradeId extends Trader {
     o String tradeId
 }
 
-transaction M2O {
-    --> Commodity commodity
-    --> Manufacturer issuer
-    --> OEM newOwner
+participant Retailer identified by tradeId extends Trader {
+    o String tradeId
 }
 
-transaction O2D {
+participant Customer identified by tradeId extends Trader {
+    o String tradeId
+}
+
+transaction TransferCommodity {
     --> Commodity commodity
-    --> OEM issuer
-    --> Distributor newOwner
+    --> Trader issuer
+    --> Trader newOwner
 }
 
 transaction SetupDemo {
+		o Supplier[] suppliers
 		o Manufacturer[] manufacturers
+		o Distributor[] distributors
+		o Retailer[] retailers
+		o Customer[] customers
 }

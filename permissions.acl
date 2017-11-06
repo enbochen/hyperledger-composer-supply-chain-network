@@ -35,84 +35,47 @@ rule Read {
     action: ALLOW
 }
 
-rule ConditionalRuleWithTransactionOfManufacturer {
-    description: "Allow all Manufacturers to access M2O transaction"
-    participant: "org.hcsc.network.Manufacturer"
+rule RuleWithTransaction {
+    description: "Allow all paticipants to access M2O transaction"
+    participant: "org.hcsc.network.*"
     operation: CREATE
-    resource: "org.hcsc.network.M2O"
+    resource: "org.hcsc.network.TransferCommodity"
     action: ALLOW
 }
 
-rule ConditionalRuleWithTransactionOfManufacturer2 {
-  	description:"Manufacturer can transfer its own commodity only by M2O transaction"
-    participant(m): "org.hcsc.network.Manufacturer"
+rule ConditionRuleWithTransaction {
+  	description:"Allow all paticipants to transfer its own commodity only by TransferCommodity"
+    participant(m): "org.hcsc.network.*"
     operation: UPDATE
     resource(v): "org.hcsc.network.*"
-    transaction(tx): "org.hcsc.network.M2O"
+    transaction(tx): "org.hcsc.network.TransferCommodity"
     condition: (v.owner.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
 
-rule ConditionalRuleWithTransactionOfManufacturer3 {
-  	description:"Manufacturer can read its own transaction(M2O) records"
-    participant(m): "org.hcsc.network.Manufacturer"
+rule ConditionalRuleWithTransaction2 {
+  	description:"Grant all paticipants to read its own transaction records"
+    participant(m): "org.hcsc.network.*"
     operation: READ
-    resource(v): "org.hcsc.network.M2O"
+    resource(v): "org.hcsc.network.TransferCommodity"
     condition: (v.issuer.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
 
-rule ConditionalRuleWithTransactionOfManufacturer4 {
-    description: "Manufacturer can create its own resource"
-    participant(m): "org.hcsc.network.Manufacturer"
+rule ConditionalRuleWithTransaction3 {
+  	description:"Grant all participants to read its own transaction records"
+    participant(m): "org.hcsc.network.*"
+    operation: READ
+    resource(v): "org.hcsc.network.TransferCommodity"
+    condition: (v.newOwner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRuleWithCreation {
+    description: "Grant all participants can create its own resource"
+    participant(m): "org.hcsc.network.*"
     operation: CREATE
     resource(v): "org.hcsc.network.Commodity"
     condition: (v.owner.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
-
-rule ConditionalRuleWithTransactionOfOEM {
-    description: "Allow all OEMs to access O2D transaction"
-    participant: "org.hcsc.network.OEM"
-    operation: CREATE
-    resource: "org.hcsc.network.O2D"
-    action: ALLOW
-}
-
-rule ConditionalRuleWithTransactionOfOEM2 {
-    description: "OEM can update its own commodity only by O2D transaction"
-    participant(m): "org.hcsc.network.OEM"
-    operation: UPDATE
-    resource(v): "org.hcsc.network.*"
-    transaction(tx): "org.hcsc.network.O2D"
-    condition: (v.owner.getIdentifier() == m.getIdentifier())
-    action: ALLOW
-}
-
-rule ConditionalRuleWithTransactionOfOEM3 {
-    description: "Every OEM can read its own transactions(M2O) record"
-    participant(m): "org.hcsc.network.OEM"
-    operation: READ
-    resource(v): "org.hcsc.network.M2O"
-    condition: (v.newOwner.getIdentifier() == m.getIdentifier())
-    action: ALLOW
-}
-
-rule ConditionalRuleWithTransactionOfOEM4 {
-    description: "All OEM can read its own transactions(O2D) record"
-    participant(m): "org.hcsc.network.OEM"
-    operation: READ
-    resource(v): "org.hcsc.network.O2D"
-    condition: (v.issuer.getIdentifier() == m.getIdentifier())
-    action: ALLOW
-}
-
-rule ConditionalRuleWithTransactionOfDistributor {
-    description: "All Distributor can read its own transactions(O2D) record"
-    participant(m): "org.hcsc.network.Distributor"
-    operation: READ
-    resource(v): "org.hcsc.network.O2D"
-    condition: (v.newOwner.getIdentifier() == m.getIdentifier())
-    action: ALLOW
-}
-
