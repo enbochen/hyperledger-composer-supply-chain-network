@@ -20,18 +20,18 @@ P.S. No.4 just only runs on web brower, all the data are stored in local storage
 This business network defines:
 
 - **Participant**
-`Manufacturer` `OEM` `Distributor`
+`Supplier` `Manufacturer` `Distributor` `Retailer`  `Customer`
 
 - **Asset**
 `Commodity`
 
 - **Transaction**
-`M2O` `O2D`
+`TransferCommodity` `SetupDemo`
 
 - **Event**
-`none` (WIP)
+`none`
 
-Commodity are owned by a Manufacturer,OEM or Distributor,  and the owner property on a Commodity can be modified by submitting a transaction(e.g. M2O, O2D). The transaction emits a SampleEvent that notifies applications of the old and new values for each modified Commodity.(WIP)
+Commodity are owned by a Supplier, Manufacturer, Distributor, Retailer or Customer,  and the owner property on a Commodity can be modified by submitting a transaction(e.g. M2O, O2D). The transaction emits a SampleEvent that notifies applications of the old and new values for each modified Commodity.(WIP)
 
 ### How to play on Bluemix Composer Playground?
 
@@ -60,14 +60,14 @@ Create a `Commodity` asset:
 }
 ```
 
-Submit a `M2O` transaction:
+Submit a `TransferCommodity` transaction:
 
 ```
 {
-  "$class": "org.hcsc.network.M2O",
+  "$class": "org.hcsc.network.TransferCommodity",
   "commodity": "resource:org.hcsc.network.Commodity#ts1",
   "issuer": "resource:org.hcsc.network.Manufacturer#M1",
-  "newOwner": "resource:org.hcsc.network.OEM#O1"
+  "newOwner": "resource:org.hcsc.network.Distributor#D1"
 }
 ```
 
