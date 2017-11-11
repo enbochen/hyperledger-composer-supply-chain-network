@@ -26,7 +26,7 @@ This business network defines:
 `Commodity`
 
 - **Transaction**
-`TransferCommodity` `SetupDemo`
+`initiatePO` `TransferCommodity` `SetupDemo`
 
 - **Event**
 `none`
@@ -54,7 +54,6 @@ Create a `Commodity` asset:
   "$class": "org.hcsc.network.Commodity",
   "tradingSymbol": "ts1",
   "description": "Aliquip.",
-  "mainExchange": "Commodo.",
   "quantity": 216.3,
   "owner": "resource:org.hcsc.network.Manufacturer#M1"
 }
