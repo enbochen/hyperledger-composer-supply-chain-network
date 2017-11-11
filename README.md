@@ -26,7 +26,7 @@ This business network defines:
 `Commodity`
 
 - **Transaction**
-`initiatePO` `TransferCommodity` `SetupDemo`
+`InitiatePO` `TransferCommodity` `SetupDemo`
 
 - **Event**
 `none`
