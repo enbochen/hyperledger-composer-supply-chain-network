@@ -26,17 +26,35 @@ rule NetworkAdminSystem {
     action: ALLOW
 }
 
-rule Read {
+rule ReadCommodity {
     description: "All participants can read its own goods"
     participant(m): "org.hcsc.network.*"
     operation: READ
-    resource(v): "org.hcsc.network.*"
+    resource(v): "org.hcsc.network.Commodity"
     condition: (v.owner.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
 
+rule VenderReadPO {
+    description: "All participants can read its own PO"
+    participant(m): "org.hcsc.network.*"
+    operation: READ
+    resource(v): "org.hcsc.network.PO"
+    condition: (v.vender.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ordererReadPO {
+    description: "All participants can read its own PO"
+    participant(m): "org.hcsc.network.*"
+    operation: READ
+    resource(v): "org.hcsc.network.PO"
+    condition: (v.orderer.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
 rule RuleWithTransaction {
-    description: "Allow all paticipants to access M2O transaction"
+    description: "Allow all paticipants to access TransferCommodity transaction"
     participant: "org.hcsc.network.*"
     operation: CREATE
     resource: "org.hcsc.network.TransferCommodity"
@@ -77,5 +95,41 @@ rule ConditionalRuleWithCreation {
     operation: CREATE
     resource(v): "org.hcsc.network.Commodity"
     condition: (v.owner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule ConditionalRulewithCreationOfPO {
+    description:"Allow all paticipants to initiate PO"
+    participant(m): "org.hcsc.network.*"
+    operation: CREATE
+    resource(v): "org.hcsc.network.PO"
+    transaction(tx): "org.hcsc.network.InitiatePO"
+    condition: (v.orderer.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule RuleWithInitiatePOTransaction {
+    description: "Allow all paticipants to access Initiate PO transaction"
+    participant: "org.hcsc.network.*"
+    operation: CREATE
+    resource: "org.hcsc.network.InitiatePO"
+    action: ALLOW
+}
+
+rule VenderCanReadTransaction {
+  	description:"Grant all paticipants to read its own transaction records"
+    participant(m): "org.hcsc.network.*"
+    operation: READ
+    resource(v): "org.hcsc.network.InitiatePO"
+    condition: (v.vender.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule OrdererCanReadTransaction {
+  	description:"Grant all participants to read its own transaction records"
+    participant(m): "org.hcsc.network.*"
+    operation: READ
+    resource(v): "org.hcsc.network.InitiatePO"
+    condition: (v.orderer.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
