@@ -21,8 +21,44 @@ asset Commodity identified by tradingSymbol {
     o String tradingSymbol
     o String description
     o Double quantity
-    --> Trader owner
+    o Double unitPrice optional
+    o Double totalPrice optional
+    --> Trader owner optional
     --> Trader issuer optional
+}
+
+/**
+ * Status of an order
+ */
+enum OrderStatus {
+    o INITIATED
+    o CONFIRMED
+    o DELIVERING
+    o DELIVERED
+}
+
+/**
+ * A concept for a simple street address
+ */
+concept Address {
+    o String city optional
+    o String country optional
+    o String locality optional
+    o String region optional
+    o String street optional
+    o String street2 optional
+    o String street3 optional
+    o String postalCode optional
+    o String postOfficeBoxNumber optional
+}
+
+asset PO identified by orderId { 
+    o String orderId 
+    o Commodity[] itemList
+    o Double orderTotalPrice optional
+    o OrderStatus orderStatus optional
+    --> Trader orderer
+    --> Trader vender
 }
 
 abstract participant Trader {
@@ -49,10 +85,19 @@ participant Customer identified by tradeId extends Trader {
     o String tradeId
 }
 
+transaction InitiatePO {
+    o String orderId 
+    o Commodity[] itemList
+    o Double orderTotalPrice optional
+    --> Trader orderer optional
+    --> Trader vender
+} 
+
 transaction TransferCommodity {
     --> Commodity commodity
     --> Trader issuer
     --> Trader newOwner
+    --> PO purchaseOrder optional
 }
 
 transaction SetupDemo {
