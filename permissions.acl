@@ -133,3 +133,21 @@ rule OrdererCanReadTransaction {
     condition: (v.orderer.getIdentifier() == m.getIdentifier())
     action: ALLOW
 }
+
+rule ConditionalRulewithCreationOfAssembly {
+    description:"Allow all paticipants to initiate PO"
+    participant(m): "org.hcsc.network.*"
+    operation: CREATE
+    resource(v): "org.hcsc.network.Commodity"
+    transaction(tx): "org.hcsc.network.AssembleParts"
+    condition: (v.owner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule RuleWithInitiateAssemblyTransaction {
+    description: "Allow all paticipants to access Initiate PO transaction"
+    participant: "org.hcsc.network.*"
+    operation: CREATE
+    resource: "org.hcsc.network.AssembleParts"
+    action: ALLOW
+}

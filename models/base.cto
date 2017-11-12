@@ -26,11 +26,12 @@ concept Trace {
 asset Commodity identified by tradingSymbol {
     o String tradingSymbol
     o String name
-    o String description
+    o String description optional
     o Double quantity
     o Double unitPrice optional
     o Double totalPrice optional
     o Trace[] trace
+    --> Commodity[] children optional
     --> PO purchaseOrder optional
     --> Trader owner optional
     --> Trader issuer optional
@@ -50,10 +51,10 @@ enum OrderStatus {
  * A concept for a simple street address
  */
 concept Address {
-    o Double longtitude range=[-180.0, 180.0] optional
-    o Double latitude range=[-90.0, 90.0] optional
-    o String city optional
-    o String country optional
+    o Double longtitude range=[-180.0, 180.0]
+    o Double latitude range=[-90.0, 90.0]
+    o String city
+    o String country
     o String locality optional
     o String region optional
     o String street optional
@@ -109,6 +110,17 @@ transaction TransferCommodity {
     --> Trader newOwner
     --> PO purchaseOrder optional
     o Address shipperLocation
+}
+
+transaction AssembleParts {
+    o String tradingSymbol
+    o String name
+    o String description optional
+    o Double quantity
+    o Double unitPrice optional
+    --> PO purchaseOrder optional
+    -->  Commodity[] children
+    o Address assemblyLocation
 }
 
 transaction SetupDemo {
