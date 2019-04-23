@@ -4,6 +4,8 @@ This is one implementation of [Hyperledger Composer](https://github.com/hyperled
 
 ![](/docs/flow.png)
 
+Master Thesis: [An Approach for Improving Transparency and Traceability of In- dustrial Supply Chain with Blockchain Technology](https://pdfs.semanticscholar.org/4472/99551b4255344d22cb45f36cc26bfc305b50.pdf)
+
 ### How to run it?
 
 1. Install packages: `npm install`
