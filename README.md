@@ -4,7 +4,7 @@ This is one implementation of [Hyperledger Composer](https://github.com/hyperled
 
 ![](/docs/flow.png)
 
-Master Thesis: [An Approach for Improving Transparency and Traceability of Industrial Supply Chain with Blockchain Technology](https://pdfs.semanticscholar.org/4472/99551b4255344d22cb45f36cc26bfc305b50.pdf)
+Master Thesis: [An Approach for Improving Transparency and Traceability of Industrial Supply Chain with Blockchain Technology](http://bit.ly/2PzWQSZ)
 
 ### How to run it?
 
